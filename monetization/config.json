@@ -1,7 +1,7 @@
 {
   "payment_config": {
-    "wechat_qr_url": "https://example.com/wechat_qr.png",
-    "alipay_qr_url": "https://example.com/alipay_qr.png",
+    "wechat_qr_url": "images/收款码.jpg",
+    "alipay_qr_url": "images/收款码.jpg",
     "wechat_id": "efficiency_helper",
     "contact_email": "help@efficiency-toolkit.com",
     "alipay_id": "ahs757@163.com"
