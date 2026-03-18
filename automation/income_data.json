@@ -1,0 +1,90 @@
+{
+  "transactions": [
+    {
+      "id": "TXN_20260318_125121",
+      "product": "全能套餐",
+      "amount": 39,
+      "source": "直接访问",
+      "customer_info": {},
+      "timestamp": "2026-03-18T12:51:21.369562",
+      "date": "2026-03-18",
+      "month": "2026-03"
+    },
+    {
+      "id": "TXN_20260318_125121",
+      "product": "朋友圈文案库",
+      "amount": 9.9,
+      "source": "知乎",
+      "customer_info": {},
+      "timestamp": "2026-03-18T12:51:21.371555",
+      "date": "2026-03-18",
+      "month": "2026-03"
+    },
+    {
+      "id": "TXN_20260318_125121",
+      "product": "自动化脚本包",
+      "amount": 19,
+      "source": "小红书",
+      "customer_info": {},
+      "timestamp": "2026-03-18T12:51:21.385511",
+      "date": "2026-03-18",
+      "month": "2026-03"
+    }
+  ],
+  "daily_summary": {
+    "2026-03-18": {
+      "revenue": 67.9,
+      "transactions": 3,
+      "products": {
+        "全能套餐": 1,
+        "朋友圈文案库": 1,
+        "自动化脚本包": 1
+      }
+    }
+  },
+  "monthly_summary": {
+    "2026-03": {
+      "revenue": 67.9,
+      "transactions": 3,
+      "products": {
+        "全能套餐": 1,
+        "朋友圈文案库": 1,
+        "自动化脚本包": 1
+      }
+    }
+  },
+  "products": {
+    "全能套餐": {
+      "revenue": 39,
+      "transactions": 1,
+      "average_price": 39.0
+    },
+    "朋友圈文案库": {
+      "revenue": 9.9,
+      "transactions": 1,
+      "average_price": 9.9
+    },
+    "自动化脚本包": {
+      "revenue": 19,
+      "transactions": 1,
+      "average_price": 19.0
+    }
+  },
+  "traffic_sources": {
+    "直接访问": {
+      "revenue": 39,
+      "transactions": 1,
+      "conversion_rate": 0
+    },
+    "知乎": {
+      "revenue": 9.9,
+      "transactions": 1,
+      "conversion_rate": 0
+    },
+    "小红书": {
+      "revenue": 19,
+      "transactions": 1,
+      "conversion_rate": 0
+    }
+  }
+}

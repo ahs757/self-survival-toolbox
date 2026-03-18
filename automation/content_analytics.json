@@ -1,0 +1,22 @@
+{
+  "published": [
+    {
+      "platform": "zhihu",
+      "title": "每天节省2小时：我用这7个工具彻底改变了工作方式",
+      "topic": "效率工具",
+      "timestamp": "20260318_124714",
+      "filepath": "content\\zhihu\\zhihu_article_效率工具_20260318_124714.md"
+    },
+    {
+      "platform": "xiaohongshu",
+      "title": "每天多出2小时！这些自动化神器太绝了⚡",
+      "topic": "自动化",
+      "timestamp": "20260318_124714",
+      "filepath": "content\\xiaohongshu\\xiaohongshu_post_自动化_20260318_124714.md"
+    }
+  ],
+  "traffic_sources": {},
+  "conversions": {},
+  "total_views": 0,
+  "total_conversions": 0
+}

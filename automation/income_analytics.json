@@ -1,0 +1,127 @@
+{
+  "total_revenue": 67.9,
+  "total_transactions": 3,
+  "average_order_value": 22.633333333333336,
+  "conversion_rate": 0,
+  "top_products": [
+    [
+      "全能套餐",
+      {
+        "revenue": 39,
+        "transactions": 1,
+        "average_price": 39.0
+      }
+    ],
+    [
+      "自动化脚本包",
+      {
+        "revenue": 19,
+        "transactions": 1,
+        "average_price": 19.0
+      }
+    ],
+    [
+      "朋友圈文案库",
+      {
+        "revenue": 9.9,
+        "transactions": 1,
+        "average_price": 9.9
+      }
+    ]
+  ],
+  "top_traffic_sources": [
+    [
+      "直接访问",
+      {
+        "revenue": 39,
+        "transactions": 1,
+        "conversion_rate": 0
+      }
+    ],
+    [
+      "小红书",
+      {
+        "revenue": 19,
+        "transactions": 1,
+        "conversion_rate": 0
+      }
+    ],
+    [
+      "知乎",
+      {
+        "revenue": 9.9,
+        "transactions": 1,
+        "conversion_rate": 0
+      }
+    ]
+  ],
+  "daily_trends": [
+    {
+      "date": "2026-03-12",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-13",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-14",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-15",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-16",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-17",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "date": "2026-03-18",
+      "revenue": 67.9,
+      "transactions": 3
+    }
+  ],
+  "monthly_trends": [
+    {
+      "month": "2025-10",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "month": "2025-11",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "month": "2025-12",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "month": "2026-01",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "month": "2026-02",
+      "revenue": 0,
+      "transactions": 0
+    },
+    {
+      "month": "2026-03",
+      "revenue": 67.9,
+      "transactions": 3
+    }
+  ]
+}
