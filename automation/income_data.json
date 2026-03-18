@@ -29,6 +29,61 @@
       "timestamp": "2026-03-18T12:51:21.385511",
       "date": "2026-03-18",
       "month": "2026-03"
+    },
+    {
+      "id": 4,
+      "product_id": "efficiency-toolkit",
+      "product_name": "效率工具包",
+      "amount": 29,
+      "channel": "xiaohongshu",
+      "customer_info": "小王",
+      "timestamp": "2026-03-18T13:41:50.114785",
+      "date": "2026-03-18",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "product_id": "automation-scripts",
+      "product_name": "自动化脚本包",
+      "amount": 19,
+      "channel": "zhihu",
+      "customer_info": "小李",
+      "timestamp": "2026-03-18T13:41:50.122754",
+      "date": "2026-03-18",
+      "status": "completed"
+    },
+    {
+      "id": 6,
+      "product_id": "resume-optimization",
+      "product_name": "简历优化",
+      "amount": 99,
+      "channel": "wechat",
+      "customer_info": "小张",
+      "timestamp": "2026-03-18T13:41:50.123749",
+      "date": "2026-03-18",
+      "status": "completed"
+    },
+    {
+      "id": 7,
+      "product_id": "efficiency-toolkit",
+      "product_name": "效率工具包",
+      "amount": 29,
+      "channel": "douyin",
+      "customer_info": "小赵",
+      "timestamp": "2026-03-18T13:41:50.124862",
+      "date": "2026-03-18",
+      "status": "completed"
+    },
+    {
+      "id": 8,
+      "product_id": "vip-group",
+      "product_name": "VIP答疑群",
+      "amount": 99,
+      "channel": "wechat",
+      "customer_info": "小钱",
+      "timestamp": "2026-03-18T13:41:50.125849",
+      "date": "2026-03-18",
+      "status": "completed"
     }
   ],
   "daily_summary": {
@@ -86,5 +141,61 @@
       "transactions": 1,
       "conversion_rate": 0
     }
+  },
+  "daily_stats": {
+    "2026-03-18": {
+      "income": 275,
+      "transactions": 5,
+      "products": {}
+    }
+  },
+  "channel_stats": {
+    "xiaohongshu": {
+      "income": 29,
+      "transactions": 1,
+      "products": {}
+    },
+    "zhihu": {
+      "income": 19,
+      "transactions": 1,
+      "products": {}
+    },
+    "wechat": {
+      "income": 198,
+      "transactions": 2,
+      "products": {}
+    },
+    "douyin": {
+      "income": 29,
+      "transactions": 1,
+      "products": {}
+    }
+  },
+  "product_stats": {
+    "efficiency-toolkit": {
+      "name": "效率工具包",
+      "income": 58,
+      "transactions": 2
+    },
+    "automation-scripts": {
+      "name": "自动化脚本包",
+      "income": 19,
+      "transactions": 1
+    },
+    "resume-optimization": {
+      "name": "简历优化",
+      "income": 99,
+      "transactions": 1
+    },
+    "vip-group": {
+      "name": "VIP答疑群",
+      "income": 99,
+      "transactions": 1
+    }
+  },
+  "goals": {
+    "daily": 100,
+    "weekly": 500,
+    "monthly": 2000
   }
 }

@@ -1,0 +1,33 @@
+{
+  "payment_config": {
+    "wechat_qr_url": "https://example.com/wechat_qr.png",
+    "alipay_qr_url": "https://example.com/alipay_qr.png",
+    "wechat_id": "efficiency_helper",
+    "contact_email": "help@efficiency-toolkit.com",
+    "alipay_id": "ahs757@163.com"
+  },
+  "products": {
+    "efficiency-toolkit": {"name": "效率工具包 v2.0", "price": 29, "original_price": 99},
+    "automation-scripts": {"name": "自动化脚本包", "price": 19, "original_price": 59},
+    "copywriting-library": {"name": "朋友圈文案库", "price": 9.9, "original_price": 29},
+    "brand-manual": {"name": "个人品牌手册", "price": 39, "original_price": 129},
+    "resume-optimization": {"name": "简历优化服务", "price": 99, "original_price": 299},
+    "career-planning": {"name": "职业规划咨询", "price": 199, "original_price": 599},
+    "bundle": {"name": "全能套餐", "price": 129, "original_price": 257}
+  },
+  "affiliate": {
+    "commission_rate": 0.3,
+    "tier_rates": {
+      "copper": 0.3,
+      "silver": 0.35,
+      "gold": 0.4,
+      "diamond": 0.5
+    },
+    "min_payout": 100
+  },
+  "marketing": {
+    "promo_codes": ["WELCOME10", "SAVE20", "VIP30"],
+    "limited_time_discount": 0.3,
+    "flash_sale_duration": 24
+  }
+}
