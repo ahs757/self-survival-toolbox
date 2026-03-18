@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付 - 效率工具包</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .payment-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        .header p {
+            color: #666;
+        }
+        .product-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .product-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .price small {
+            font-size: 0.4em;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+        .payment-methods h3 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+        .method-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .method-tab {
+            flex: 1;
+            padding: 20px;
+            border: 3px solid #eee;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        .method-tab.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        .method-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .method-tab .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .method-tab .label {
+            font-weight: bold;
+            color: #333;
+        }
+        .qr-code {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code img {
+            max-width: 220px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .qr-code .placeholder {
+            width: 220px;
+            height: 220px;
+            background: #ddd;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.1em;
+            text-align: center;
+            padding: 20px;
+        }
+        .qr-code p {
+            margin-top: 15px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        .instructions {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .instructions h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .contact-info {
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            text-align: center;
+        }
+        .contact-info h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        .contact-item .icon {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success-message h3 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .success-message p {
+            color: #155724;
+            line-height: 1.6;
+        }
+        .badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        .countdown {
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .trust-badge {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .trust-badge .icon {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="header">
+            <h1>💳 安全支付</h1>
+            <p>官方保障 · 即时发货 · 售后无忧</p>
+        </div>
+
+        <div class="product-info">
+            <div class="product-name" id="productName">效率工具包 v2.0</div>
+            <div class="price" id="productPrice">¥29 <small>¥99</small></div>
+            <div class="badge">限时特惠 - 省70%</div>
+            <div class="countdown" id="countdown">优惠倒计时: 23:59:59</div>
+        </div>
+
+        <div class="payment-methods">
+            <h3>选择支付方式</h3>
+            <div class="method-tabs">
+                <div class="method-tab active" onclick="switchPaymentMethod('wechat')">
+                    <div class="icon">💚</div>
+                    <div class="label">微信支付</div>
+                </div>
+                <div class="method-tab" onclick="switchPaymentMethod('alipay')">
+                    <div class="icon">💙</div>
+                    <div class="label">支付宝</div>
+                </div>
+            </div>
+
+            <div class="qr-code" id="wechatQR">
+                <img src="" alt="微信收款码" id="wechatQRImg" style="display:none;">
+                <div class="placeholder" id="wechatPlaceholder">
+                    📱<br>收款码待配置<br><small>点击下方按钮配置</small>
+                </div>
+                <p>请使用微信扫描二维码支付 ¥<span id="wechatAmount">29</span></p>
+            </div>
+
+            <div class="qr-code" id="alipayQR" style="display: none;">
+                <img src="" alt="支付宝收款码" id="alipayQRImg" style="display:none;">
+                <div class="placeholder" id="alipayPlaceholder">
+                    📱<br>收款码待配置<br><small>点击下方按钮配置</small>
+                </div>
+                <p>请使用支付宝扫描二维码支付 ¥<span id="alipayAmount">29</span></p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h4>📌 支付说明</h4>
+            <ol>
+                <li>扫描上方二维码完成支付</li>
+                <li>支付金额: ¥<span id="payAmount">29</span></li>
+                <li>支付完成后截图保存</li>
+                <li>添加客服微信发送截图</li>
+                <li>客服确认后5分钟内发送产品</li>
+            </ol>
+        </div>
+
+        <div class="contact-info">
+            <h3>📞 联系客服</h3>
+            <div class="contact-item">
+                <div class="icon">💚</div>
+                <div id="wechatId">微信号: 待配置</div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">📧</div>
+                <div id="emailAddr">邮箱: 待配置</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="confirmPayment()">
+            ✅ 我已完成支付
+        </button>
+
+        <div class="success-message" id="successMessage">
+            <h3>🎉 支付确认成功！</h3>
+            <p>感谢您的购买！<br>产品将在24小时内发送到您的邮箱<br>如有问题请联系客服</p>
+        </div>
+
+        <div class="trust-badges">
+            <div class="trust-badge">
+                <div class="icon">🔒</div>
+                <div>安全支付</div>
+            </div>
+            <div class="trust-badge">
+                <div class="icon">⚡</div>
+                <div>即时发货</div>
+            </div>
+            <div class="trust-badge">
+                <div class="icon">🔄</div>
+                <div>7天退款</div>
+            </div>
+        </div>
+
+        <!-- 配置按钮 (管理员可见) -->
+        <button onclick="showConfig()" style="margin-top: 20px; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; width: 100%;">
+            ⚙️ 配置收款信息
+        </button>
+    </div>
+
+    <!-- 配置模态框 -->
+    <div id="configModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h2 style="margin-bottom: 20px; color: #333;">⚙️ 配置收款信息</h2>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">微信收款码图片URL:</label>
+                <input type="text" id="configWechatQR" placeholder="输入微信收款码图片链接" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">支付宝收款码图片URL:</label>
+                <input type="text" id="configAlipayQR" placeholder="输入支付宝收款码图片链接" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">客服微信号:</label>
+                <input type="text" id="configWechatId" placeholder="输入客服微信号" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">联系邮箱:</label>
+                <input type="text" id="configEmail" placeholder="输入联系邮箱" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button onclick="saveConfig()" style="flex: 1; padding: 12px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                    💾 保存配置
+                </button>
+                <button onclick="hideConfig()" style="flex: 1; padding: 12px; background: #f8f9fa; color: #333; border: 1px solid #ddd; border-radius: 8px; cursor: pointer;">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 从URL参数获取产品信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('product') || 'efficiency-toolkit';
+        const price = urlParams.get('price') || '29';
+
+        // 产品信息映射
+        const products = {
+            'efficiency-toolkit': { name: '效率工具包 v2.0', originalPrice: '99' },
+            'automation-scripts': { name: '自动化脚本包', originalPrice: '59' },
+            'copywriting-library': { name: '朋友圈文案库', originalPrice: '29' },
+            'brand-manual': { name: '个人品牌手册', originalPrice: '129' },
+            'bundle': { name: '全能套餐', originalPrice: '257' }
+        };
+
+        // 从localStorage获取配置
+        function getConfig() {
+            const config = localStorage.getItem('paymentConfig');
+            return config ? JSON.parse(config) : {
+                wechatQR: '',
+                alipayQR: '',
+                wechatId: '',
+                email: ''
+            };
+        }
+
+        // 保存配置到localStorage
+        function saveConfigToStorage(config) {
+            localStorage.setItem('paymentConfig', JSON.stringify(config));
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            const product = products[productId] || products['efficiency-toolkit'];
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productPrice').innerHTML = `¥${price} <small>¥${product.originalPrice}</small>`;
+            document.getElementById('payAmount').textContent = price;
+            document.getElementById('wechatAmount').textContent = price;
+            document.getElementById('alipayAmount').textContent = price;
+
+            // 加载配置
+            loadConfig();
+
+            // 启动倒计时
+            startCountdown();
+        });
+
+        // 加载配置
+        function loadConfig() {
+            const config = getConfig();
+
+            if (config.wechatQR) {
+                document.getElementById('wechatQRImg').src = config.wechatQR;
+                document.getElementById('wechatQRImg').style.display = 'block';
+                document.getElementById('wechatPlaceholder').style.display = 'none';
+            }
+
+            if (config.alipayQR) {
+                document.getElementById('alipayQRImg').src = config.alipayQR;
+                document.getElementById('alipayQRImg').style.display = 'block';
+                document.getElementById('alipayPlaceholder').style.display = 'none';
+            }
+
+            if (config.wechatId) {
+                document.getElementById('wechatId').textContent = '微信号: ' + config.wechatId;
+            }
+
+            if (config.email) {
+                document.getElementById('emailAddr').textContent = '邮箱: ' + config.email;
+            }
+        }
+
+        // 切换支付方式
+        function switchPaymentMethod(method) {
+            document.querySelectorAll('.method-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            document.getElementById('wechatQR').style.display = method === 'wechat' ? 'flex' : 'none';
+            document.getElementById('alipayQR').style.display = method === 'alipay' ? 'flex' : 'none';
+        }
+
+        // 确认支付
+        function confirmPayment() {
+            const paymentData = {
+                product: productId,
+                productName: products[productId]?.name || '效率工具包',
+                price: price,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                referrer: document.referrer
+            };
+
+            console.log('Payment confirmed:', paymentData);
+
+            // 发送到追踪系统
+            trackPayment(paymentData);
+
+            document.getElementById('successMessage').classList.add('show');
+
+            // 发送通知
+            sendPaymentNotification(paymentData);
+        }
+
+        // 追踪支付
+        function trackPayment(data) {
+            // 可以接入实际的追踪系统
+            console.log('Tracking payment:', data);
+
+            // 发送到Google Analytics（如果配置了）
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'purchase', {
+                    transaction_id: Date.now().toString(),
+                    value: parseFloat(data.price),
+                    currency: 'CNY',
+                    items: [{
+                        id: data.product,
+                        name: data.productName,
+                        price: parseFloat(data.price)
+                    }]
+                });
+            }
+        }
+
+        // 发送支付通知
+        function sendPaymentNotification(data) {
+            console.log('Sending payment notification:', data);
+
+            setTimeout(() => {
+                const config = getConfig();
+                const wechatId = config.wechatId || '客服微信';
+                alert(`感谢您的购买！\n\n请添加客服微信【${wechatId}】发送支付截图\n产品将在确认后5分钟内发送`);
+            }, 1000);
+        }
+
+        // 页面访问追踪
+        function trackPageView() {
+            const pageData = {
+                page: 'payment',
+                product: productId,
+                price: price,
+                referrer: document.referrer,
+                timestamp: new Date().toISOString()
+            };
+            console.log('Page view:', pageData);
+        }
+
+        trackPageView();
+
+        // 倒计时功能
+        function startCountdown() {
+            // 设置24小时倒计时
+            let hours = 23, minutes = 59, seconds = 59;
+
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 23;
+                        }
+                    }
+                }
+
+                const h = String(hours).padStart(2, '0');
+                const m = String(minutes).padStart(2, '0');
+                const s = String(seconds).padStart(2, '0');
+                document.getElementById('countdown').textContent = `优惠倒计时: ${h}:${m}:${s}`;
+            }, 1000);
+        }
+
+        // 配置模态框功能
+        function showConfig() {
+            const config = getConfig();
+            document.getElementById('configWechatQR').value = config.wechatQR || '';
+            document.getElementById('configAlipayQR').value = config.alipayQR || '';
+            document.getElementById('configWechatId').value = config.wechatId || '';
+            document.getElementById('configEmail').value = config.email || '';
+            document.getElementById('configModal').style.display = 'flex';
+        }
+
+        function hideConfig() {
+            document.getElementById('configModal').style.display = 'none';
+        }
+
+        function saveConfig() {
+            const config = {
+                wechatQR: document.getElementById('configWechatQR').value,
+                alipayQR: document.getElementById('configAlipayQR').value,
+                wechatId: document.getElementById('configWechatId').value,
+                email: document.getElementById('configEmail').value
+            };
+
+            saveConfigToStorage(config);
+            loadConfig();
+            hideConfig();
+
+            alert('✅ 配置已保存！收款码已更新。');
+        }
+    </script>
+</body>
+</html>
