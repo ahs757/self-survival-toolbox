@@ -1,0 +1,49 @@
+{
+  "content_generation": {
+    "interval_hours": 6,
+    "daily_posts": 8,
+    "platforms": ["小红书", "知乎", "微信", "抖音", "微博"],
+    "content_themes": ["效率工具", "自动化", "赚钱", "副业", "AI工具", "Python", "职场提升"]
+  },
+  "customer_follow_up": {
+    "interval_hours": 12,
+    "check_new_leads": true,
+    "follow_up_days": [7, 30, 90],
+    "auto_reply": true
+  },
+  "analytics": {
+    "interval_hours": 24,
+    "generate_reports": true,
+    "track_metrics": ["sales", "revenue", "conversion", "traffic"],
+    "report_format": "json"
+  },
+  "affiliate_management": {
+    "interval_hours": 24,
+    "process_payouts": true,
+    "min_payout": 100,
+    "commission_rates": {
+      "copper": 0.3,
+      "silver": 0.35,
+      "gold": 0.4,
+      "diamond": 0.5
+    }
+  },
+  "knowledge_products": {
+    "interval_hours": 168,
+    "update_products": true,
+    "course_platforms": ["小鹅通", "知识星球", "腾讯课堂"],
+    "ebook_formats": ["PDF", "EPUB", "MOBI"]
+  },
+  "backup": {
+    "interval_hours": 24,
+    "backup_data": true,
+    "backup_dir": "backups",
+    "retention_days": 30
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/scheduler.log",
+    "max_size_mb": 10,
+    "backup_count": 5
+  }
+}
