@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自我生存工具箱 - 副业变现资源站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .product-card .price {
+            font-size: 2em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .product-card .price span {
+            font-size: 0.5em;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .product-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .product-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-card li:before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .free-tag {
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .paid-tag {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin: 40px 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .github-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+
+        .github-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .github-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contact {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+        }
+
+        .contact h3 {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ 自我生存工具箱</h1>
+            <p>副业变现 · 个人成长 · 效率工具</p>
+        </header>
+
+        <h2 class="section-title">🎁 免费资源</h2>
+        <div class="products">
+            <div class="product-card">
+                <span class="free-tag">免费</span>
+                <h3>GitHub README 模板</h3>
+                <p>专业级 README 模板，让你的开源项目更吸引人</p>
+                <ul>
+                    <li>完整项目结构说明</li>
+                    <li>精美的徽章和图标</li>
+                    <li>贡献指南和许可证</li>
+                </ul>
+                <a href="https://github.com/ahs757/self-survival-toolbox" class="btn">GitHub 免费获取</a>
+            </div>
+
+            <div class="product-card">
+                <span class="free-tag">免费</span>
+                <h3>项目启动模板</h3>
+                <p>从0到1的项目规划模板，帮你理清思路</p>
+                <ul>
+                    <li>目标设定与拆解</li>
+                    <li>竞品分析框架</li>
+                    <li>开发计划表</li>
+                </ul>
+                <a href="https://github.com/ahs757/self-survival-toolbox" class="btn">GitHub 免费获取</a>
+            </div>
+
+            <div class="product-card">
+                <span class="free-tag">免费</span>
+                <h3>Python 自动化脚本模板</h3>
+                <p>开箱即用的自动化脚本模板，提升工作效率</p>
+                <ul>
+                    <li>完整的日志系统</li>
+                    <li>配置文件管理</li>
+                    <li>错误处理机制</li>
+                </ul>
+                <a href="https://github.com/ahs757/self-survival-toolbox" class="btn">GitHub 免费获取</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">💰 付费产品</h2>
+        <div class="products">
+            <div class="product-card">
+                <span class="paid-tag">热销</span>
+                <h3>朋友圈文案库</h3>
+                <div class="price">¥9.9 <span>¥29.9</span></div>
+                <ul>
+                    <li>100+ 精选文案</li>
+                    <li>分类清晰，即取即用</li>
+                    <li>每月更新10条</li>
+                    <li>覆盖各种场景</li>
+                </ul>
+                <button class="btn" onclick="showPayment()">立即购买</button>
+            </div>
+
+            <div class="product-card">
+                <span class="paid-tag">新上架</span>
+                <h3>AI 变现入门指南</h3>
+                <div class="price">¥19.9 <span>¥49.9</span></div>
+                <ul>
+                    <li>AI 变现全攻略</li>
+                    <li>实战案例解析</li>
+                    <li>工具推荐与使用</li>
+                    <li>避坑指南</li>
+                </ul>
+                <button class="btn" onclick="showPayment()">立即购买</button>
+            </div>
+
+            <div class="product-card">
+                <span class="paid-tag">即将上线</span>
+                <h3>OpenClaw 教程</h3>
+                <div class="price">¥49.9 <span>¥99.9</span></div>
+                <ul>
+                    <li>完整教程文档</li>
+                    <li>视频讲解</li>
+                    <li>实战项目</li>
+                    <li>社群答疑</li>
+                </ul>
+                <button class="btn" onclick="alert('即将上线，敬请期待！')">敬请期待</button>
+            </div>
+        </div>
+
+        <div class="github-section">
+            <h2>⭐ GitHub 开源项目</h2>
+            <p>所有免费模板都在 GitHub 开源，欢迎 Star 支持！</p>
+            <a href="https://github.com/ahs757/self-survival-toolbox" class="btn">访问 GitHub 仓库</a>
+        </div>
+
+        <div class="contact">
+            <h3>📞 联系方式</h3>
+            <p>微信扫码添加好友，备注"购买"即可</p>
+            <p>📧 邮箱: your-email@example.com</p>
+            <p>💬 支持微信、支付宝付款</p>
+        </div>
+
+        <footer>
+            <p>© 2026 自我生存工具箱 | Made with ❤️ by ahs757</p>
+        </footer>
+    </div>
+
+    <script>
+        function showPayment() {
+            alert('请添加微信好友进行购买，备注"购买+产品名称"');
+        }
+    </script>
+</body>
+</html>
