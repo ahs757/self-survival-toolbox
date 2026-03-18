@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付 - 效率工具包</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .payment-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .product-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .product-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .price small {
+            font-size: 0.5em;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+        .payment-methods h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .method-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .method-tab {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .method-tab.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        .method-tab:hover {
+            border-color: #667eea;
+        }
+        .qr-code {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .qr-code img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        .qr-code p {
+            margin-top: 10px;
+            color: #666;
+        }
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .contact-info h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .contact-item .icon {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .instructions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="header">
+            <h1>💳 支付确认</h1>
+            <p>请选择支付方式完成购买</p>
+        </div>
+
+        <div class="product-info">
+            <div class="product-name" id="productName">效率工具包 v2.0</div>
+            <div class="price" id="productPrice">¥29 <small>¥99</small></div>
+        </div>
+
+        <div class="payment-methods">
+            <h3>选择支付方式</h3>
+            <div class="method-tabs">
+                <div class="method-tab active" onclick="switchPaymentMethod('wechat')">
+                    <div style="font-size: 1.5em">💚</div>
+                    <div>微信支付</div>
+                </div>
+                <div class="method-tab" onclick="switchPaymentMethod('alipay')">
+                    <div style="font-size: 1.5em">💙</div>
+                    <div>支付宝</div>
+                </div>
+            </div>
+
+            <div class="qr-code" id="wechatQR">
+                <img src="https://via.placeholder.com/200x200?text=微信收款码" alt="微信收款码" id="wechatQRImg">
+                <p>请使用微信扫描二维码支付</p>
+            </div>
+
+            <div class="qr-code" id="alipayQR" style="display: none;">
+                <img src="https://via.placeholder.com/200x200?text=支付宝收款码" alt="支付宝收款码" id="alipayQRImg">
+                <p>请使用支付宝扫描二维码支付</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h4>📌 支付说明</h4>
+            <ol>
+                <li>扫描上方二维码完成支付</li>
+                <li>支付完成后截图保存</li>
+                <li>添加客服微信发送截图</li>
+                <li>客服确认后发送产品</li>
+            </ol>
+        </div>
+
+        <div class="contact-info">
+            <h3>📞 联系客服</h3>
+            <div class="contact-item">
+                <div class="icon">💚</div>
+                <div>微信号: efficiency_helper</div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">📧</div>
+                <div>邮箱: help@efficiency-toolkit.com</div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="confirmPayment()">
+            我已完成支付
+        </button>
+
+        <div class="success-message" id="successMessage">
+            <h3>🎉 支付确认成功！</h3>
+            <p>产品将在24小时内发送到您的邮箱</p>
+            <p>如有问题请联系客服</p>
+        </div>
+    </div>
+
+    <script>
+        // 从URL参数获取产品信息
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('product') || 'efficiency-toolkit';
+        const price = urlParams.get('price') || '29';
+
+        // 产品信息映射
+        const products = {
+            'efficiency-toolkit': { name: '效率工具包 v2.0', originalPrice: '99' },
+            'automation-scripts': { name: '自动化脚本包', originalPrice: '59' },
+            'copywriting-library': { name: '朋友圈文案库', originalPrice: '29' },
+            'bundle': { name: '全能套餐', originalPrice: '157' }
+        };
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            const product = products[productId] || products['efficiency-toolkit'];
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productPrice').innerHTML = `¥${price} <small>¥${product.originalPrice}</small>`;
+        });
+
+        // 切换支付方式
+        function switchPaymentMethod(method) {
+            // 更新标签状态
+            document.querySelectorAll('.method-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // 显示对应的二维码
+            document.getElementById('wechatQR').style.display = method === 'wechat' ? 'block' : 'none';
+            document.getElementById('alipayQR').style.display = method === 'alipay' ? 'block' : 'none';
+        }
+
+        // 确认支付
+        function confirmPayment() {
+            // 记录支付确认
+            const paymentData = {
+                product: productId,
+                price: price,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            };
+
+            // 发送到服务器记录
+            console.log('Payment confirmed:', paymentData);
+
+            // 显示成功消息
+            document.getElementById('successMessage').classList.add('show');
+
+            // 发送通知（这里可以接入实际的通知系统）
+            sendPaymentNotification(paymentData);
+        }
+
+        // 发送支付通知
+        function sendPaymentNotification(data) {
+            // 这里可以接入实际的邮件/短信通知系统
+            console.log('Sending payment notification:', data);
+
+            // 模拟发送成功
+            setTimeout(() => {
+                alert('感谢您的购买！产品将在24小时内发送到您的邮箱。');
+            }, 1000);
+        }
+
+        // 页面访问追踪
+        function trackPageView() {
+            const pageData = {
+                page: 'payment',
+                product: productId,
+                price: price,
+                referrer: document.referrer,
+                timestamp: new Date().toISOString()
+            };
+            console.log('Page view:', pageData);
+        }
+
+        trackPageView();
+    </script>
+</body>
+</html>

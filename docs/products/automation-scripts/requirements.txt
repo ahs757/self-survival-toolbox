@@ -1,0 +1,49 @@
+# 自动化脚本包 - Python依赖包
+
+# 定时任务依赖
+schedule>=1.1.0
+
+# 网络请求依赖
+requests>=2.25.0
+urllib3>=1.26.0
+
+# HTML解析依赖
+beautifulsoup4>=4.9.0
+lxml>=4.6.0
+
+# 数据处理依赖
+pandas>=1.3.0
+numpy>=1.21.0
+
+# 邮件处理依赖
+# 注意：imaplib和smtplib是Python标准库，无需安装
+
+# 文件操作依赖
+pathlib>=1.0.1
+
+# 时间处理依赖
+datetime>=4.3
+
+# JSON处理依赖
+json>=2.0.9
+
+# 日志记录依赖
+logging>=0.4.9.6
+
+# 配置文件解析依赖
+configparser>=5.0.0
+
+# 命令行参数解析依赖
+argparse>=1.4.0
+
+# 可选依赖（增强功能）
+# selenium>=4.0.0  # 浏览器自动化
+# scrapy>=2.5.0  # 网络爬虫
+# tweepy>=4.0.0  # Twitter API
+# facebook-sdk>=3.0.0  # Facebook API
+# instagram-private-api>=1.6.0  # Instagram API
+
+# 开发依赖（可选）
+# pytest>=6.0.0  # 测试框架
+# black>=21.0.0  # 代码格式化
+# flake8>=3.9.0  # 代码检查

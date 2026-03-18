@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持我们 - 自我生存工具箱</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #475569;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        header p { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .tier {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .tier:hover {
+            transform: translateY(-4px);
+        }
+        .tier.featured {
+            border-color: var(--primary);
+            position: relative;
+        }
+        .tier.featured::before {
+            content: "推荐";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .tier-emoji { font-size: 3rem; margin-bottom: 1rem; }
+        .tier-name { font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .tier-price { font-size: 2rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem; }
+        .tier-price span { font-size: 1rem; color: var(--text-muted); }
+        .tier-features { list-style: none; margin-bottom: 1.5rem; }
+        .tier-features li {
+            padding: 0.3rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .tier-features li::before { content: "✓ "; color: var(--success); }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .other-ways {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .other-ways h3 { margin-bottom: 1rem; }
+        .way-list { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .way-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        .way-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>❤️ 支持我们</h1>
+            <p>如果你觉得这些工具对你有帮助，请考虑支持我们的持续开发！</p>
+        </header>
+
+        <div class="tiers">
+            <div class="tier">
+                <div class="tier-emoji">☕</div>
+                <div class="tier-name">一杯咖啡</div>
+                <div class="tier-price">¥9.9<span>/次</span></div>
+                <ul class="tier-features">
+                    <li>表达感谢</li>
+                    <li>获得支持者徽章</li>
+                    <li>名字列入致谢名单</li>
+                </ul>
+                <button class="btn btn-primary" onclick="alert('感谢支持！')">请我喝咖啡</button>
+            </div>
+            <div class="tier featured">
+                <div class="tier-emoji">🚀</div>
+                <div class="tier-name">加速开发</div>
+                <div class="tier-price">¥29.9<span>/月</span></div>
+                <ul class="tier-features">
+                    <li>优先功能建议</li>
+                    <li>专属支持频道</li>
+                    <li>提前体验新功能</li>
+                    <li>定制化工具开发</li>
+                </ul>
+                <button class="btn btn-primary" onclick="alert('感谢支持！')">成为赞助者</button>
+            </div>
+            <div class="tier">
+                <div class="tier-emoji">🏆</div>
+                <div class="tier-name">企业赞助</div>
+                <div class="tier-price">¥299<span>/月</span></div>
+                <ul class="tier-features">
+                    <li>Logo展示</li>
+                    <li>定制开发服务</li>
+                    <li>技术咨询服务</li>
+                    <li>专属维护支持</li>
+                </ul>
+                <button class="btn btn-primary" onclick="alert('请联系我们')">联系我们</button>
+            </div>
+        </div>
+
+        <div class="other-ways">
+            <h3>🌟 其他支持方式</h3>
+            <div class="way-list">
+                <div class="way-item">
+                    <div class="way-icon">⭐</div>
+                    <div>GitHub Star</div>
+                </div>
+                <div class="way-item">
+                    <div class="way-icon">🐛</div>
+                    <div>提交Bug报告</div>
+                </div>
+                <div class="way-item">
+                    <div class="way-icon">💡</div>
+                    <div>功能建议</div>
+                </div>
+                <div class="way-item">
+                    <div class="way-icon">📢</div>
+                    <div>分享推荐</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>每一份支持都是我们前进的动力！ 🙏</p>
+        </footer>
+    </div>
+</body>
+</html>

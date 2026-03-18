@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>效率工具箱 - 让技术为你工作</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #475569;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg) 0%, rgba(99, 102, 241, 0.1) 100%);
+        }
+        .hero-content { max-width: 800px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 2.5rem; }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-size: 2.5rem; font-weight: bold; color: var(--primary); }
+        .hero-stat-label { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Pain Points */
+        .pain-points {
+            padding: 5rem 2rem;
+            background: var(--surface);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .pain-item {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .pain-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .pain-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .pain-desc { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Solutions */
+        .solutions { padding: 5rem 2rem; }
+        .solution-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .solution-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 12px;
+        }
+        .solution-item:nth-child(even) { flex-direction: row-reverse; }
+        .solution-icon { font-size: 4rem; flex-shrink: 0; }
+        .solution-content h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .solution-content p { color: var(--text-muted); }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: var(--surface);
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .testimonial {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        .testimonial-author { font-weight: bold; }
+        .testimonial-role { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* CTA */
+        .final-cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, var(--bg) 100%);
+        }
+        .final-cta h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .final-cta p { color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .solution-item { flex-direction: column !important; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>用技术创造价值</h1>
+            <p>一套实用的效率工具集合，帮助你自动化日常工作，提升生产力。告别重复劳动，让工具为你工作。</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">7+</div>
+                    <div class="hero-stat-label">实用工具</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">80%</div>
+                    <div class="hero-stat-label">时间节省</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">0</div>
+                    <div class="hero-stat-label">学习门槛</div>
+                </div>
+            </div>
+            <a href="dashboard.html" class="btn btn-primary">🚀 立即开始</a>
+            <a href="#features" class="btn btn-outline">了解更多</a>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="pain-points" id="features">
+        <h2 class="section-title">你是否也有这些困扰？</h2>
+        <div class="pain-grid">
+            <div class="pain-item">
+                <div class="pain-icon">📁</div>
+                <div class="pain-title">文件管理混乱</div>
+                <div class="pain-desc">下载文件夹一团糟，找不到需要的文件？</div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-icon">⏰</div>
+                <div class="pain-title">重复工作太多</div>
+                <div class="pain-desc">每天花大量时间在重复性操作上？</div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-icon">📊</div>
+                <div class="pain-title">数据处理繁琐</div>
+                <div class="pain-desc">统计分析靠手工，效率低下容易出错？</div>
+            </div>
+            <div class="pain-item">
+                <div class="pain-icon">🔄</div>
+                <div class="pain-title">备份总是忘记</div>
+                <div class="pain-desc">重要文件没有备份，数据丢失风险高？</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section class="solutions">
+        <h2 class="section-title">一站式解决方案</h2>
+        <div class="solution-list">
+            <div class="solution-item">
+                <div class="solution-icon">📂</div>
+                <div class="solution-content">
+                    <h3>智能文件整理</h3>
+                    <p>一键自动分类整理文件，支持按类型、日期等多种规则，让你的电脑井井有条。</p>
+                </div>
+            </div>
+            <div class="solution-item">
+                <div class="solution-icon">⚡</div>
+                <div class="solution-content">
+                    <h3>自动化工作流</h3>
+                    <p>从系统监控到文件备份，从数据统计到报告生成，全面自动化你的日常工作。</p>
+                </div>
+            </div>
+            <div class="solution-item">
+                <div class="solution-icon">📝</div>
+                <div class="solution-content">
+                    <h3>内容创作助手</h3>
+                    <p>文本统计、格式转换、批量处理，让内容创作更加高效便捷。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">用户怎么说</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p class="testimonial-text">"文件整理工具帮我省了大量时间，下载文件夹再也不乱了！"</p>
+                <div class="testimonial-author">- 张三</div>
+                <div class="testimonial-role">产品经理</div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"系统监控功能很实用，让我随时了解电脑状态。"</p>
+                <div class="testimonial-author">- 李四</div>
+                <div class="testimonial-role">开发者</div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"增量备份功能太棒了，再也不怕数据丢失。"</p>
+                <div class="testimonial-author">- 王五</div>
+                <div class="testimonial-role">设计师</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>准备好了吗？</h2>
+        <p>加入数千名用户，开始用技术创造价值！</p>
+        <a href="dashboard.html" class="btn btn-primary">🚀 免费开始使用</a>
+        <a href="monetization/donation.html" class="btn btn-outline">❤️ 支持我们</a>
+    </section>
+
+    <footer>
+        <p>© 2026 自我生存工具箱 · 用技术创造价值 · Made with ❤️</p>
+    </footer>
+</body>
+</html>
