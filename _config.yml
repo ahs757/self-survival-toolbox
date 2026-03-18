@@ -1,0 +1,9 @@
+title: 效率工具箱
+description: 提升工作效率的必备工具
+baseurl: ""
+url: "https://ahs757.github.io"
+theme: jekyll-theme-minimal
+exclude:
+  - agents/
+  - .cowork-temp/
+  - .git/
