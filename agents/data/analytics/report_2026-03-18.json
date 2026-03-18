@@ -1,0 +1,15 @@
+{
+  "date": "2026-03-18",
+  "summary": {
+    "total_sales": 0,
+    "total_revenue": 0,
+    "new_customers": 0,
+    "avg_order_value": 0
+  },
+  "top_performing_products": [],
+  "channel_performance": [],
+  "recommendations": [
+    "增加营销内容发布频率",
+    "推出套餐产品，提高客单价"
+  ]
+}

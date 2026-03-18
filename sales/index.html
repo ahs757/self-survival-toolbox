@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>效率工具包 - 让AI帮你赚钱</title>
+    <meta name="description" content="零基础学会用AI和自动化工具赚钱，月入过万的真实方法">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: #475569;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 顶部警告条 */
+        .alert-bar {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--bg) 0%, rgba(99, 102, 241, 0.15) 100%);
+        }
+        .hero-content { max-width: 800px; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat { text-align: center; background: var(--surface); padding: 15px 25px; border-radius: 12px; }
+        .hero-stat-num { font-size: 2rem; font-weight: bold; color: var(--success); }
+        .hero-stat-label { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* 价格卡片 */
+        .price-card {
+            background: linear-gradient(135deg, var(--surface), rgba(99, 102, 241, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .price-label { color: var(--text-muted); text-decoration: line-through; font-size: 1.2rem; }
+        .price-main { font-size: 3.5rem; font-weight: bold; color: var(--danger); margin: 10px 0; }
+        .price-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        .discount-badge {
+            background: var(--danger);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* 按钮 */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        /* QR码支付区 */
+        .payment-section {
+            padding: 50px 20px;
+            background: var(--surface);
+            text-align: center;
+        }
+        .payment-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+        .payment-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .payment-tab {
+            padding: 15px 30px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .payment-tab.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+        .qr-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .qr-container img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .payment-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--danger);
+            margin: 20px 0;
+        }
+        .payment-steps {
+            text-align: left;
+            max-width: 400px;
+            margin: 30px auto;
+            background: var(--bg);
+            padding: 20px 30px;
+            border-radius: 12px;
+        }
+        .payment-steps ol {
+            list-style: decimal;
+            padding-left: 20px;
+        }
+        .payment-steps li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        /* 产品列表 */
+        .products-section {
+            padding: 50px 20px;
+            background: var(--bg);
+        }
+        .products-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: var(--surface);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        .product-icon { font-size: 3rem; margin-bottom: 15px; }
+        .product-name { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+        .product-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+        .product-price { font-size: 1.5rem; font-weight: bold; color: var(--danger); }
+
+        /* 信任标签 */
+        .trust-section {
+            padding: 40px 20px;
+            background: var(--surface);
+            text-align: center;
+        }
+        .trust-items {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .trust-item { text-align: center; }
+        .trust-icon { font-size: 2rem; margin-bottom: 10px; }
+        .trust-text { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* 客服联系 */
+        .contact-section {
+            padding: 30px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), var(--bg));
+            text-align: center;
+        }
+        .contact-info {
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+        .contact-info span {
+            margin: 0 15px;
+            color: var(--text-muted);
+        }
+
+        /* 倒计时 */
+        .countdown {
+            text-align: center;
+            color: var(--warning);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { flex-direction: column; gap: 10px; }
+            .price-main { font-size: 2.5rem; }
+            .payment-tabs { flex-direction: column; }
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- 顶部警告 -->
+    <div class="alert-bar">
+        ⚠️ 限时特惠：原价¥299，今日仅需¥29！仅剩最后 10 份！
+    </div>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🚀 用AI自动化赚钱</h1>
+            <p>一套完整的效率工具集合，帮你自动化日常工作，开启被动收入。<br>不需要编程基础，下载即用！</p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">7+</div>
+                    <div class="hero-stat-label">实用工具</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">80%</div>
+                    <div class="hero-stat-label">时间节省</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">0</div>
+                    <div class="hero-stat-label">学习门槛</div>
+                </div>
+            </div>
+
+            <!-- 价格卡片 -->
+            <div class="price-card">
+                <div class="discount-badge">限时70%折扣</div>
+                <div class="price-label">原价 ¥299</div>
+                <div class="price-main">¥29</div>
+                <div class="price-sub">一次购买 · 永久使用 · 免费更新</div>
+                <div class="countdown" id="countdown">优惠倒计时: 23:59:59</div>
+                <a href="#payment" class="btn btn-primary">🔥 立即抢购</a>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">已有 1,286 人购买</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支付区域 -->
+    <section class="payment-section" id="payment">
+        <h2>💳 选择支付方式</h2>
+
+        <div class="payment-tabs">
+            <button class="payment-tab active" onclick="showPayment('wechat')">💚 微信支付</button>
+            <button class="payment-tab" onclick="showPayment('alipay')">💙 支付宝</button>
+        </div>
+
+        <div id="wechatPayment">
+            <div class="payment-amount">¥29</div>
+            <div class="qr-container">
+                <img src="收款码.jpg" alt="微信收款码" id="wechatQR">
+            </div>
+            <p style="color: var(--text-muted);">请截图或保存二维码到相册，使用微信扫码支付</p>
+        </div>
+
+        <div id="alipayPayment" class="hidden">
+            <div class="payment-amount">¥29</div>
+            <div class="qr-container">
+                <img src="收款码.jpg" alt="支付宝收款码" id="alipayQR">
+            </div>
+            <p style="color: var(--text-muted);">请截图或保存二维码到相册，使用支付宝扫码支付</p>
+        </div>
+
+        <div class="payment-steps">
+            <h4>📌 支付流程</h4>
+            <ol>
+                <li>截图保存上方二维码</li>
+                <li>打开微信/支付宝扫码支付 ¥29</li>
+                <li>支付完成后截图保存凭证</li>
+                <li>添加客服微信发送截图</li>
+                <li>客服5分钟内发送产品下载链接</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 产品列表 -->
+    <section class="products-section">
+        <h2>📦 包含产品</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">📂</div>
+                <div class="product-name">智能文件整理器</div>
+                <div class="product-desc">一键自动分类整理文件，支持按类型、日期等多种规则</div>
+                <div class="product-price">价值 ¥49</div>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">⚡</div>
+                <div class="product-name">自动化脚本包</div>
+                <div class="product-desc">批量处理文件、自动备份、定时任务等实用脚本</div>
+                <div class="product-price">价值 ¥99</div>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">📊</div>
+                <div class="product-name">数据分析助手</div>
+                <div class="product-desc">Excel数据自动处理、报表生成、图表制作</div>
+                <div class="product-price">价值 ¥79</div>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🤖</div>
+                <div class="product-name">AI提示词库</div>
+                <div class="product-desc">1000+高质量AI提示词，覆盖写作、编程、营销等场景</div>
+                <div class="product-price">价值 ¥39</div>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">📝</div>
+                <div class="product-name">朋友圈文案库</div>
+                <div class="product-desc">500+爆款文案模板，营销推广必备</div>
+                <div class="product-price">价值 ¥19</div>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🎯</div>
+                <div class="product-name">副业赚钱指南</div>
+                <div class="product-desc">最新副业项目汇总，手把手教你操作</div>
+                <div class="product-price">价值 ¥19</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 信任保障 -->
+    <section class="trust-section">
+        <h2>🔒 购买保障</h2>
+        <div class="trust-items">
+            <div class="trust-item">
+                <div class="trust-icon">✅</div>
+                <div class="trust-text">正版授权</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚡</div>
+                <div class="trust-text">5分钟发货</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">🔄</div>
+                <div class="trust-text">7天退款</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">♾️</div>
+                <div class="trust-text">永久更新</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">💬</div>
+                <div class="trust-text">专属客服</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客服联系 -->
+    <section class="contact-section">
+        <h3>📞 联系客服</h3>
+        <div class="contact-info">
+            <span>💚 微信: efficiency_helper</span>
+            <span>📧 邮箱: help@efficiency-toolkit.com</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 效率工具包 · 用技术创造价值 · 本产品已获得软件著作权保护</p>
+    </footer>
+
+    <script>
+        // 支付方式切换
+        function showPayment(method) {
+            document.querySelectorAll('.payment-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('wechatPayment').classList.toggle('hidden', method !== 'wechat');
+            document.getElementById('alipayPayment').classList.toggle('hidden', method !== 'alipay');
+        }
+
+        // 倒计时
+        function startCountdown() {
+            let hours = 23, minutes = 59, seconds = 59;
+
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) hours = 23;
+                    }
+                }
+
+                const h = String(hours).padStart(2, '0');
+                const m = String(minutes).padStart(2, '0');
+                const s = String(seconds).padStart(2, '0');
+                document.getElementById('countdown').textContent = `优惠倒计时: ${h}:${m}:${s}`;
+            }, 1000);
+        }
+
+        startCountdown();
+
+        // 访问统计
+        console.log('Page viewed:', new Date().toISOString());
+    </script>
+</body>
+</html>

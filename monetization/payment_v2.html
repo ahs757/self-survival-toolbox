@@ -284,18 +284,12 @@
             </div>
 
             <div class="qr-code" id="wechatQR">
-                <img src="" alt="微信收款码" id="wechatQRImg" style="display:none;">
-                <div class="placeholder" id="wechatPlaceholder">
-                    📱<br>收款码待配置<br><small>点击下方按钮配置</small>
-                </div>
+                <img src="images/收款码.jpg" alt="微信收款码" id="wechatQRImg" style="max-width:200px;border-radius:10px;">
                 <p>请使用微信扫描二维码支付 ¥<span id="wechatAmount">29</span></p>
             </div>
 
             <div class="qr-code" id="alipayQR" style="display: none;">
-                <img src="" alt="支付宝收款码" id="alipayQRImg" style="display:none;">
-                <div class="placeholder" id="alipayPlaceholder">
-                    📱<br>收款码待配置<br><small>点击下方按钮配置</small>
-                </div>
+                <img src="images/收款码.jpg" alt="支付宝收款码" id="alipayQRImg" style="max-width:200px;border-radius:10px;">
                 <p>请使用支付宝扫描二维码支付 ¥<span id="alipayAmount">29</span></p>
             </div>
         </div>
@@ -404,21 +398,12 @@
             'bundle': { name: '全能套餐', originalPrice: '257' }
         };
 
-        // 从localStorage获取配置
-        function getConfig() {
-            const config = localStorage.getItem('paymentConfig');
-            return config ? JSON.parse(config) : {
-                wechatQR: '',
-                alipayQR: '',
-                wechatId: '',
-                email: ''
-            };
-        }
-
-        // 保存配置到localStorage
-        function saveConfigToStorage(config) {
-            localStorage.setItem('paymentConfig', JSON.stringify(config));
-        }
+        // 默认配置
+        const defaultConfig = {
+            wechatId: 'efficiency_helper',
+            email: 'help@efficiency-toolkit.com',
+            alipayId: 'ahs757@163.com'
+        };
 
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
@@ -429,37 +414,13 @@
             document.getElementById('wechatAmount').textContent = price;
             document.getElementById('alipayAmount').textContent = price;
 
-            // 加载配置
-            loadConfig();
+            // 设置联系信息
+            document.getElementById('wechatId').textContent = '微信号: ' + defaultConfig.wechatId;
+            document.getElementById('emailAddr').textContent = '邮箱: ' + defaultConfig.email;
 
             // 启动倒计时
             startCountdown();
         });
-
-        // 加载配置
-        function loadConfig() {
-            const config = getConfig();
-
-            if (config.wechatQR) {
-                document.getElementById('wechatQRImg').src = config.wechatQR;
-                document.getElementById('wechatQRImg').style.display = 'block';
-                document.getElementById('wechatPlaceholder').style.display = 'none';
-            }
-
-            if (config.alipayQR) {
-                document.getElementById('alipayQRImg').src = config.alipayQR;
-                document.getElementById('alipayQRImg').style.display = 'block';
-                document.getElementById('alipayPlaceholder').style.display = 'none';
-            }
-
-            if (config.wechatId) {
-                document.getElementById('wechatId').textContent = '微信号: ' + config.wechatId;
-            }
-
-            if (config.email) {
-                document.getElementById('emailAddr').textContent = '邮箱: ' + config.email;
-            }
-        }
 
         // 切换支付方式
         function switchPaymentMethod(method) {

@@ -1,0 +1,39 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Python自动化办公从入门到精通",
+      "description": "零基础学会用Python自动化处理Excel、Word、邮件等办公任务",
+      "price": 299,
+      "modules": [
+        "Python基础语法",
+        "Excel自动化处理",
+        "Word文档批量生成",
+        "邮件自动发送",
+        "定时任务自动化"
+      ],
+      "created_at": "2026-03-18T15:15:29.372752",
+      "status": "draft",
+      "enrollments": 0,
+      "revenue": 0
+    },
+    {
+      "id": 2,
+      "title": "副业赚钱实战营",
+      "description": "从零开始打造被动收入系统",
+      "price": 499,
+      "modules": [
+        "副业选择与定位",
+        "产品设计与开发",
+        "营销推广策略",
+        "客户管理与转化",
+        "自动化运营系统"
+      ],
+      "created_at": "2026-03-18T15:15:29.373751",
+      "status": "draft",
+      "enrollments": 0,
+      "revenue": 0
+    }
+  ],
+  "enrollments": []
+}
