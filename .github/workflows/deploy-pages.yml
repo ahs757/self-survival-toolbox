@@ -1,0 +1,64 @@
+# GitHub Pages 部署工作流
+# 自动部署销售页面到 GitHub Pages
+
+name: Deploy Sales Pages to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'monetization/**'
+      - 'products/**'
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create site structure
+        run: |
+          mkdir -p _site
+          # 复制主页
+          cp monetization/landing.html _site/index.html
+          # 复制产品销售页面
+          cp monetization/product-sales.html _site/products.html
+          cp monetization/donation.html _site/donate.html
+          # 复制产品文件（下载用）
+          mkdir -p _site/downloads
+          cp products/paid/*.py _site/downloads/ 2>/dev/null || true
+          cp products/paid/*.md _site/downloads/ 2>/dev/null || true
+          cp products/efficiency-toolkit/*.zip _site/downloads/ 2>/dev/null || true
+          cp products/automation-scripts/*.zip _site/downloads/ 2>/dev/null || true
+          # 复制文档
+          cp -r docs/* _site/ 2>/dev/null || true
+          echo "✅ 站点文件准备完成"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
